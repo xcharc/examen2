@@ -1,0 +1,31 @@
+<h1>Lista de Pendientes</h1>
+
+<a href="{% url 'create_task' %}">+ Crear Nuevo Pendiente</a>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Usuario</th>
+      <th>Título</th>
+      <th>Completado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in object_list %}
+    <tr>
+      <td>{{ task.id }}</td>
+      <td>{{ task.userId }}</td>
+      <td>{{ task.title }}</td>
+      <td>{{ task.completed }}</td>
+      <td>
+        <a href="{% url 'edit_task' task.id %}">Editar</a> |
+        <a href="{% url 'delete_task' task.id %}">Borrar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No hay pendientes.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
